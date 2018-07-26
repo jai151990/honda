@@ -1,13 +1,14 @@
 #!/bin/bash
-ENVIRONMENT = $1
+ENVIRONMENT=$1
 if [ $ENVIRONMENT = "QA" ]; then
-  for i in 'cat ip.txt'
+  for i in `cat ip.txt`
     do
-      echo "Deploy war file $i:"
-      sshpass -p "1234" scp target/ola.war siva@$i:/home/siva/soft/apache-tomcat-8.5.32/webapps
+      echo "deploye war file into $i "
       sleep 3
-      echo "Start the $i tomcat server"
-      sshpass -p "1234" ssh siva@$i "JAVA_HOME=/home/siva/soft/jdk1.8.0_171" "/home/siva/soft/apache-tomcat-8.5.32/bin/./startup.sh"
+      sshpass -p "1234" scp target/companybank.war priya@$i:/home/priya/soft/apache-tomcat-8.5.32/webapps
+
+      echo "starting tomcat server $i"
+      sshpass -p "1234" ssh priya@$i "JAVA_HOME=/home/priya/soft/jdk1.8.0_171" "/home/priya/soft/apache-tomcat-8.5.32/bin/./startup.sh"
     done
-  echo "Deploy success"
+  echo "deploy success"
 fi
