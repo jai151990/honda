@@ -1,8 +1,20 @@
-added data to pull
-sample
-new data added
-sample jenkins file
-def f1()
-{
- add(a=2+3)
+peline { 
+    agent any 
+    stages {
+        stage('checkout') { 
+            steps { 
+                checkout scm 
+            }
+        }
+        stage('build'){
+            steps {
+                sh 'mvn install'
+            }
+        }
+        stage('clean') {
+            steps {
+                sh 'mvn clean'
+            }
+        }
+    }
 }
